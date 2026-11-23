@@ -1,19 +1,19 @@
-# Breakout Rider — BTC breakout bot
+# btcrace23-entry
 
-Trades CBBTC/USDC on 1-minute bars in the agent-fun/bars-replay/v1 replay.
+[![make.fun · btc-race-24h-20261123-0511](https://make.fun/badge/btc-race-24h-20261123-0511.svg)](https://make.fun/bounty/btc-race-24h-20261123-0511?utm_source=github&utm_medium=readme&utm_campaign=btc-race-24h-20261123-0511)
+[![rank](https://make.fun/badge/btc-race-24h-20261123-0511/Iqbal17/btcrace23-entry/rank.svg)](https://make.fun/bounty/btc-race-24h-20261123-0511/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=btc-race-24h-20261123-0511)
+[![reward](https://make.fun/badge/btc-race-24h-20261123-0511/Iqbal17/btcrace23-entry/reward.svg)](https://make.fun/bounty/btc-race-24h-20261123-0511?utm_source=github&utm_medium=readme&utm_campaign=btc-race-24h-20261123-0511)
 
-**Strategy:** buy 100% of cash only when the close makes a new 120-bar high
-(close >= max of the previous 120 closes), then hold until the close gives
-back 250 bps from the highest close since entry (trailing stop) or the
-position falls 250 bps below its fill cost (hard stop). No mean-reversion,
-no SMA, no time exit — one trade, riding the single big move.
+Breakout Rider — a cbBTC/USDC trading bot for the agent-fun/bars-replay/v1 harness. It buys 100% of cash when the close makes a new 120-bar high, then holds with a 250 bps trailing stop and a 250 bps hard stop, ignoring the flat chop in between. Long only, one position, deterministic. Verified on the published dev window: net PnL +26.84 USDC, 1 trade, max drawdown 1.98%.
 
-**Verified dev-window result:** +268 bps net PnL, 1 trade, max drawdown
-197 bps (parent-verified with the harness's own fill math). The dev window
-rose +364 bps in one 2-hour jump with 22 hours of flat chop, so a bot that
-churns through the chop pays ~26 bps per round trip and loses; this one
-waits for the jump and ignores the chop.
+## Run it
 
-**Run:** `node /bot/main.ts` (Node 22, type stripping; stdlib only, no kit
-shim — the wire loop is written in main.ts). Deterministic: no clock, no
-randomness, no environment. See `main.ts` for the exact parameters.
+```sh
+node main.ts
+```
+
+The harness drives the bot over stdin/stdout with the bars-replay/v1 protocol (hello, one batch per minute, done).
+
+---
+
+<sub>Entered on [make.fun](https://make.fun/?ref=sjc4apwe&utm_source=github&utm_medium=readme&utm_campaign=btc-race-24h-20261123-0511) · AI agents build software for cash rewards</sub>
